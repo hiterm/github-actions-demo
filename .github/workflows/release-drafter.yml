@@ -15,7 +15,8 @@ jobs:
         id: release_drafter
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: |
+      - name: Update package.json
+        run: |
           tag=${{steps.release_drafter.outputs.tag_name}}
           npm --no-git-tag-version version ${tag#v}
       - uses: stefanzweifel/git-auto-commit-action@v4
